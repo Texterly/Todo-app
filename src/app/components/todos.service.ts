@@ -10,28 +10,17 @@ export class TodosService {
     return this.todosJSON ? JSON.parse(this.todosJSON) : [];
   }
   todos = this.getTodosLocalStorage();
-  //   todos = [
-  //     {
-  //       title: 'First todo',
-  //       completed: false,
-  //     },
-  //     {
-  //       title: 'Second todo',
-  //       completed: true,
-  //     },
-  //   ];
-
   inputTodo: string = '';
 
-  deleteTodo(id: number) {
-    this.todos = this.todos.filter((v: any, i: number) => i !== id);
-  }
-  addTodo() {
-    this.todos.push({
-      title: this.inputTodo,
-      completed: false,
-    });
+  //   deleteTodo(id: number) {
+  //     this.todos = this.todos.filter((v: any, i: number) => i !== id);
+  //   }
+  //   addTodo() {
+  //     this.todos.push({
+  //       title: this.inputTodo,
+  //       completed: false,
+  //     });
 
-    this.inputTodo = '';
-  }
+  //     this.inputTodo = '';
+  //   }
 }
