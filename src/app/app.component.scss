@@ -1,6 +1,17 @@
 .app {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
+  height: 100vh;
+  background-color: #5bb5ff;
+  .wrapper {
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 1px solid #000000;
+    padding: 50px;
+    margin: 20px;
+    .header {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }

@@ -1,26 +1,37 @@
-import { Injectable } from '@angular/core';
+import {
+  ApplicationRef,
+  ChangeDetectorRef,
+  inject,
+  Injectable,
+} from '@angular/core';
+import { Todo } from '../models/Todo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
-  todosJSON: any;
-  getTodosLocalStorage() {
-    this.todosJSON = localStorage.getItem('todoList');
-    return this.todosJSON ? JSON.parse(this.todosJSON) : [];
+  private appRef: ApplicationRef = inject(ApplicationRef);
+
+  getTodosLocalStorage(): Todo[] {
+    const todosJSON = localStorage.getItem('todoList');
+    setTimeout(() => this.appRef.tick());
+    return todosJSON ? JSON.parse(todosJSON) : [];
   }
-  todos = this.getTodosLocalStorage();
+
   inputTodo: string = '';
 
-  //   deleteTodo(id: number) {
-  //     this.todos = this.todos.filter((v: any, i: number) => i !== id);
-  //   }
-  //   addTodo() {
-  //     this.todos.push({
-  //       title: this.inputTodo,
-  //       completed: false,
-  //     });
+  // addTodo() {}
 
-  //     this.inputTodo = '';
-  //   }
+  // updateTodo(id: number) {
+  //   let todos: Todo[] = this.getTodosLocalStorage();
+  //   const todo: Todo | undefined = todos.find((v: any, i: number) => i === id);
+  // }
+
+  // getTodo() {}
+
+  // deleteTodo(id: number) {
+  //   let todos = this.getTodosLocalStorage();
+  //   todos = todos.filter((v: any, i: number) => i !== id);
+  //   localStorage.setItem('todoList', JSON.stringify(todos));
+  // }
 }

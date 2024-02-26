@@ -14,10 +14,10 @@ import { TodosService } from '../todos.service';
 export class TodosComponent {
   todos: Todo[];
   inputTodo: string;
-  clicked: boolean = false;
   time!: number;
   randomPart!: number;
   randomPartTwo!: number;
+  id!: number;
 
   generateId() {
     this.time = Date.now();
@@ -27,29 +27,41 @@ export class TodosComponent {
   }
 
   constructor(public todosService: TodosService) {
-    this.todos = todosService.todos;
+    this.todos = todosService.getTodosLocalStorage();
     this.inputTodo = todosService.inputTodo;
   }
+
+  setLocalSorage() {
+    localStorage.setItem('todoList', JSON.stringify(this.todos));
+  }
+
   deleteTodo(id: number) {
     this.todos = this.todos.filter((v, i) => i !== id);
-    localStorage.setItem('todoList', JSON.stringify(this.todos));
+    this.setLocalSorage();
   }
+
   addTodo() {
-    this.todos.push({
-      id: this.generateId(),
-      title: this.inputTodo,
-      completed: false,
-    });
+    if (this.inputTodo.trim().length === 0) {
+      return;
+    } else {
+      this.todos.push({
+        id: this.generateId(),
+        title: this.inputTodo[0].toUpperCase() + this.inputTodo.slice(1),
+        completed: false,
+      });
+      console.log(this.todos);
 
-    this.inputTodo = '';
-    localStorage.setItem('todoList', JSON.stringify(this.todos));
+      this.inputTodo = '';
+      this.setLocalSorage();
+    }
   }
 
-  // deleteTodo(id: number) {
-  //   this.todosService.deleteTodo(id);
-  // }
+  updateTodo(i: any) {
+    if (this.todos[i].id === this.id) {
+      this.todos[i].title = 'sfgsagf';
+    }
+    console.log(this.inputTodo);
 
-  // addTodo() {
-  //   this.todosService.addTodo();
-  // }
+    console.log(this.todos[i].title);
+  }
 }
