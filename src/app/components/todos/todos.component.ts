@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ApplicationModule, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../models/Todo';
 import { TodosService } from '../todos.service';
@@ -18,6 +18,7 @@ export class TodosComponent {
   randomPart!: number;
   randomPartTwo!: number;
   id!: number;
+  newTodo!: string;
 
   generateId() {
     this.time = Date.now();
@@ -54,11 +55,20 @@ export class TodosComponent {
     }
   }
 
-  updateTodo(i: number) {
-    if (this.todos[i].id === this.id) {
-      this.todos[i].title = 'sfgsagf';
-    }
+  isValidIndex(index: number): boolean {
+    return index >= 0 && index < this.todos.length;
+  }
 
-    console.log(this.todos[i].title);
+  editTodo(index: number, newTodo: string): void {
+    if (this.isValidIndex(index)) {
+      this.todos[index].title = newTodo[0].toUpperCase() + newTodo.slice(1);
+    }
+    this.newTodo = '';
+    this.setLocalSorage();
+  }
+
+  getTaskById(id: number) {
+    const foundTask = this.todos.filter((v, i) => i === id);
+    console.log(foundTask);
   }
 }

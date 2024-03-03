@@ -9,6 +9,9 @@
     />
     <input class="todoSubmit" type="submit" value="+" />
   </form>
+  <div class="editTodo">
+    <input type="text" [(ngModel)]="newTodo" placeholder="Edit your todo" />
+  </div>
   <div
     class="todos {{ todo.completed ? 'done' : '' }}"
     *ngFor="let todo of todos; let i = index"
@@ -17,7 +20,8 @@
     <div class="content" (click)="todo.completed = !todo.completed">
       {{ todo.title }}
     </div>
-    <button class="edit" (click)="updateTodo(i)">Edit</button>
+    <button class="edit" (click)="editTodo(i, newTodo)">Edit</button>
     <button class="remove" (click)="deleteTodo(i)">Remove</button>
+    <button class="get" (click)="getTaskById(i)">get</button>
   </div>
 </div>

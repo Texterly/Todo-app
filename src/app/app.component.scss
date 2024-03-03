@@ -3,6 +3,12 @@
   justify-content: center;
   height: 100vh;
   background-color: #5bb5ff;
+  a {
+    height: 50px;
+    width: 50px;
+    background-color: #ff0000;
+    border-radius: 20px;
+  }
   .wrapper {
     background-color: #ffffff;
     border-radius: 50px;

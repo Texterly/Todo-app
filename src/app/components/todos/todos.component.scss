@@ -20,6 +20,17 @@
       }
     }
   }
+  .editTodo {
+    display: flex;
+    justify-content: center;
+    input {
+      font-size: 20px;
+      border-radius: 20px;
+      padding-left: 10px;
+      width: 440px;
+      height: 40px;
+    }
+  }
   .todos {
     display: flex;
     height: 40px;
@@ -44,6 +55,9 @@
     }
     .remove {
       width: 15%;
+      border-radius: 10px;
+    }
+    .get {
       border-radius: 10px;
     }
   }
