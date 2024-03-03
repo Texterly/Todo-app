@@ -1,13 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Todo } from '../../models/Todo';
+import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TaskDetailComponent],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
 })
@@ -19,6 +21,7 @@ export class TodosComponent {
   randomPartTwo!: number;
   id!: number;
   newTodo!: string;
+  task!: void;
 
   generateId() {
     this.time = Date.now();
@@ -27,7 +30,11 @@ export class TodosComponent {
     return this.time + this.randomPart + this.randomPartTwo;
   }
 
-  constructor(public todosService: TodosService) {
+  constructor(
+    public todosService: TodosService,
+    public route: ActivatedRoute,
+    private location: Location
+  ) {
     this.todos = todosService.getTodosLocalStorage();
     this.inputTodo = todosService.inputTodo;
   }
@@ -62,7 +69,7 @@ export class TodosComponent {
   editTodo(index: number, newTodo: string): void {
     if (this.isValidIndex(index)) {
       this.todos[index].title = newTodo[0].toUpperCase() + newTodo.slice(1);
-    }
+    } else return;
     this.newTodo = '';
     this.setLocalSorage();
   }
@@ -71,4 +78,14 @@ export class TodosComponent {
     const foundTask = this.todos.filter((v, i) => i === id);
     console.log(foundTask);
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+  // ngOnInit(): void {
+  //   this.route.paramMap.subscribe((params) => {
+  //     const taskId = +params.get('id');
+  //     this.task = this.getTaskById(taskId);
+  //   });
+  // }
 }

@@ -12,6 +12,7 @@
   <div class="editTodo">
     <input type="text" [(ngModel)]="newTodo" placeholder="Edit your todo" />
   </div>
+  <button type="button" (click)="goBack()">go back</button>
   <div
     class="todos {{ todo.completed ? 'done' : '' }}"
     *ngFor="let todo of todos; let i = index"
@@ -20,6 +21,7 @@
     <div class="content" (click)="todo.completed = !todo.completed">
       {{ todo.title }}
     </div>
+
     <button class="edit" (click)="editTodo(i, newTodo)">Edit</button>
     <button class="remove" (click)="deleteTodo(i)">Remove</button>
     <button class="get" (click)="getTaskById(i)">get</button>
