@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ApplicationModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../models/Todo';
 import { TodosService } from '../todos.service';
@@ -49,18 +49,15 @@ export class TodosComponent {
         title: this.inputTodo[0].toUpperCase() + this.inputTodo.slice(1),
         completed: false,
       });
-      console.log(this.todos);
-
       this.inputTodo = '';
       this.setLocalSorage();
     }
   }
 
-  updateTodo(i: any) {
+  updateTodo(i: number) {
     if (this.todos[i].id === this.id) {
       this.todos[i].title = 'sfgsagf';
     }
-    console.log(this.inputTodo);
 
     console.log(this.todos[i].title);
   }
